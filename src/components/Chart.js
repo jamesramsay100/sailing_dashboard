@@ -16,14 +16,14 @@ function createData(time, amount) {
 }
 
 const data = [
-  createData("00:00", 0),
-  createData("03:00", 300),
-  createData("06:00", 600),
-  createData("09:00", 800),
-  createData("12:00", 1500),
-  createData("15:00", 2000),
-  createData("18:00", 2400),
-  createData("21:00", 2400),
+  createData("00:00", 12),
+  createData("03:00", 11),
+  createData("06:00", 12),
+  createData("09:00", 9),
+  createData("12:00", 13),
+  createData("15:00", 12),
+  createData("18:00", 11.5),
+  createData("21:00", 10.5),
   createData("24:00", undefined),
 ];
 
@@ -32,7 +32,7 @@ export default function Chart() {
 
   return (
     <React.Fragment>
-      <Title>Today</Title>
+      <Title>Boat A</Title>
       <ResponsiveContainer>
         <LineChart
           data={data}
@@ -50,7 +50,7 @@ export default function Chart() {
               position="left"
               style={{ textAnchor: "middle", fill: theme.palette.text.primary }}
             >
-              Sales ($)
+              Boat speed (knts)
             </Label>
           </YAxis>
           <Line
