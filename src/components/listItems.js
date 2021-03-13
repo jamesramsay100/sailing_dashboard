@@ -6,7 +6,6 @@ import ListSubheader from "@material-ui/core/ListSubheader";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import BarChartIcon from "@material-ui/icons/BarChart";
 import LayersIcon from "@material-ui/icons/Layers";
-import AssignmentIcon from "@material-ui/icons/Assignment";
 import DirectionsBoatIcon from "@material-ui/icons/DirectionsBoat";
 
 export const mainListItems = (
