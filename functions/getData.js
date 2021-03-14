@@ -4,7 +4,7 @@ require("dotenv").config();
 exports.handler = async (event) => {
   const GET_DATA = `
     query{
-        allData{
+        allData(_size: 999){
           data{
             TimeStamp
             SOG
