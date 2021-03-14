@@ -1,0 +1,30 @@
+type Data {
+  BoatName: String!
+  RowCount: Float
+  TimeStamp: Float!
+  Year: Float
+  Month: Float
+  Day: Float
+  Hour: Float
+  Minute: Float
+  Second: Float
+  Longitude: Float!
+  Latitude: Float!
+  SOG: Float!
+  COG: Float!
+  Pitch: Float!
+  PitchTarget: Float
+  Heel: Float!
+  HeelTarget: Float
+  HeelRange: Float!
+  ClewLoad: Float!
+  Rudder: Float!
+  VMG: Float!
+  TWD: Float
+  TWS: Float
+  Boom: Float!
+}
+
+type Query {
+  allData: [Data!]!
+}

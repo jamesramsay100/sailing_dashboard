@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useTheme } from "@material-ui/core/styles";
 import {
   LineChart,
@@ -30,12 +30,26 @@ const data = [
 export default function Chart() {
   const theme = useTheme();
 
+  const [chartData, setChartData] = useState([]);
+
+  const loadData = async () => {
+    const res = await fetch("/.netlify/functions/getData");
+    const resData = await res.json();
+    const newData = resData.data.allData.data;
+    setChartData(newData);
+    console.log(newData);
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
   return (
     <React.Fragment>
       <Title>Boat A</Title>
       <ResponsiveContainer>
         <LineChart
-          data={data}
+          data={chartData}
           margin={{
             top: 16,
             right: 16,
@@ -43,19 +57,20 @@ export default function Chart() {
             left: 24,
           }}
         >
-          <XAxis dataKey="time" stroke={theme.palette.text.secondary} />
+          <XAxis dataKey="TimeStamp"></XAxis>
+
           <YAxis stroke={theme.palette.text.secondary}>
             <Label
               angle={270}
               position="left"
               style={{ textAnchor: "middle", fill: theme.palette.text.primary }}
             >
-              Boat speed (knts)
+              SOG (knts)
             </Label>
           </YAxis>
           <Line
             type="monotone"
-            dataKey="amount"
+            dataKey="SOG"
             stroke={theme.palette.primary.main}
             dot={false}
           />
