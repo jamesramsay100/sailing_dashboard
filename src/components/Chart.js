@@ -10,10 +10,10 @@ import {
 } from "recharts";
 import Title from "./Title";
 
-// Generate Sales Data
-function createData(time, amount) {
-  return { time, amount };
-}
+// // Generate Sales Data
+// function createData(time, amount) {
+//   return { time, amount };
+// }
 
 export default function Chart() {
   const theme = useTheme();
@@ -34,7 +34,7 @@ export default function Chart() {
 
   return (
     <React.Fragment>
-      <Title>Boat A</Title>
+      {/* <Title>Boat A</Title> */}
       <ResponsiveContainer>
         <LineChart
           data={chartData}
