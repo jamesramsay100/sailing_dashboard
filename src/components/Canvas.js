@@ -24,10 +24,13 @@ export default function Canvas() {
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
-  const [sensor, setSensor] = useState("");
+  const [sensor, setSensor] = useState("Pitch");
 
   const handleDropdownChange = (event) => {
-    setSensor(event.target.value);
+    // Handle change in dropdown menu value
+    const sensor_val = event.target.value;
+    setSensor(sensor_val);
+    console.log(`Dropdown updated state to value ${sensor_val}`);
   };
 
   return (
@@ -43,14 +46,12 @@ export default function Canvas() {
             onChange={handleDropdownChange}
             label="Sensor"
           >
-            <MenuItem value="">
-              <em>Pick sensor</em>
-            </MenuItem>
+            <MenuItem value={"SOG"}>SOG</MenuItem>
             <MenuItem value={"Rudder"}>Rudder</MenuItem>
             <MenuItem value={"Pitch"}>Pitch</MenuItem>
             <MenuItem value={"Heel"}>Heel</MenuItem>
           </Select>
-          <Chart />
+          <Chart chartSensor={sensor} />
         </Paper>
       </Grid>
       {/* Boat data */}
