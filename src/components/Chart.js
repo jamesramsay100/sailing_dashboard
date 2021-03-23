@@ -8,45 +8,30 @@ import {
   Label,
   ResponsiveContainer,
 } from "recharts";
-import Title from "./Title";
-
-// Generate Sales Data
-function createData(time, amount) {
-  return { time, amount };
-}
-
-const data = [
-  createData("00:00", 12),
-  createData("03:00", 11),
-  createData("06:00", 12),
-  createData("09:00", 9),
-  createData("12:00", 13),
-  createData("15:00", 12),
-  createData("18:00", 11.5),
-  createData("21:00", 10.5),
-  createData("24:00", undefined),
-];
-
-export default function Chart() {
+// import Title from "./Title";
+const Chart = ({ chartSensor }) => {
   const theme = useTheme();
 
+  // define state variable that contains data for plotting chart
   const [chartData, setChartData] = useState([]);
 
-  const loadData = async () => {
-    const res = await fetch("/.netlify/functions/getData");
+  // this function loads FB data and updates chartData state variable
+  const loadData = async (sensor) => {
+    const res = await fetch(`/.netlify/functions/getData?sensor=${sensor}`);
     const resData = await res.json();
     const newData = resData.data.allData.data;
     setChartData(newData);
-    console.log(newData);
+    console.log(`Changed chart.js selected sensor to ${sensor}`);
   };
 
+  // whenever state variable chartSensor, reload data and rerender
   useEffect(() => {
-    loadData();
-  }, []);
+    loadData(chartSensor);
+  }, [chartSensor]);
 
   return (
     <React.Fragment>
-      <Title>Boat A</Title>
+      {/* <Title>Boat A</Title> */}
       <ResponsiveContainer>
         <LineChart
           data={chartData}
@@ -65,12 +50,12 @@ export default function Chart() {
               position="left"
               style={{ textAnchor: "middle", fill: theme.palette.text.primary }}
             >
-              SOG (knts)
+              {chartSensor}
             </Label>
           </YAxis>
           <Line
             type="monotone"
-            dataKey="SOG"
+            dataKey={chartSensor}
             stroke={theme.palette.primary.main}
             dot={false}
           />
@@ -78,4 +63,6 @@ export default function Chart() {
       </ResponsiveContainer>
     </React.Fragment>
   );
-}
+};
+
+export default Chart;

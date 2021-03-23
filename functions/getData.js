@@ -2,12 +2,14 @@ const axios = require("axios");
 require("dotenv").config();
 
 exports.handler = async (event) => {
+  const sensor = event.queryStringParameters.sensor;
+  console.log(`Fetching data for sensor ${sensor}`);
   const GET_DATA = `
     query{
         allData(_size: 999){
           data{
             TimeStamp
-            SOG
+            ${sensor}
           }
         }
       }
@@ -25,7 +27,6 @@ exports.handler = async (event) => {
     },
   });
 
-  console.log(data);
   return {
     statusCode: 200,
     body: JSON.stringify(data),
